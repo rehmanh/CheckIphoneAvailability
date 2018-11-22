@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'open-uri'
+require 'nokogiri'
+require 'mechanize'
+require 'gmail'
+
+url = "https://www.apple.com/shop/refurbished/iphone"
+iphone = "iPhone 8 Plus"
+
+mechanize = Mechanize.new
+page = mechanize.get(url)
+
+link = page.link_with(text: /#{iphone}/)
+
+unless link.nil?
+  Gmail.connect('', '') do |gmail|
+    gmail.deliver do 
+      to "io.rehmanh@gmail.com"
+      subject "iPhone 8 Plus Is Now Available In The Clearance Store!"
+      text_part do
+        body "iPhone 8 Plus is now available at Apple's Refurb Store!\nGo to #{url} to check it out!"
+      end
+    end
+    gmail.logout
+  end
+end
+
+exit 0
+
+
