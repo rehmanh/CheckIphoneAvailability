@@ -16,7 +16,7 @@ link = page.link_with(text: /#{iphone}/)
 unless link.nil?
   Gmail.connect('', '') do |gmail|
     gmail.deliver do 
-      to "io.rehmanh@gmail.com"
+      to ""
       subject "iPhone 8 Plus Is Now Available In The Clearance Store!"
       text_part do
         body "iPhone 8 Plus is now available at Apple's Refurb Store!\nGo to #{url} to check it out!"
